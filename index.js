@@ -37,7 +37,6 @@ const app = index.use((req, res, next) => {
 const PORT = process.env.PORT || config.port;
 
 
-
 const server = app.listen(PORT, () => {
     db().then(() =>
     console.log('server is running on port', server.address().port));
