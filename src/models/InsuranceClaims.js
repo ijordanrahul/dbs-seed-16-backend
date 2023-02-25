@@ -40,9 +40,10 @@ const InsuranceClaimsSchema = new Schema({
         required: true,
     },
     lastEditedClaimDate: {
-        type: String,
+        type: Date,
         required: false,
+        default: Date.now()
     },
 });
 
-module.exports = InsuranceClaims = mongoose.model("users", InsuranceClaimsSchema);
+module.exports = InsuranceClaims = mongoose.model("claims", InsuranceClaimsSchema);
