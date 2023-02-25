@@ -55,17 +55,20 @@ module.exports.edit = async(params, res) => {
 
 module.exports.retrieveClaimsLimited = async(req, res) => {
     const { eId } = req.query;
-    // console.log("hell")
-    // policies = await PolicySchema.find({employeeId: "63f99f8bb23b33b81d61cd49"}).exec()
-    // user = await UserSchema.findById(mongoose.Types.ObjectId(userid)).exec();
-    // claims = await InsuranceClaimSchema.findById(mongoose.Types.ObjectId('63f9b4929717f7fc3aecf431')).exec();
-    // claims = await InsuranceClaimSchema.find({insuranceId: "63f9ab7f9717f7fc3aecf430"}).exec()
-    // console.log(policies)
-    // console.log(claims)
-    // claim = await InsuranceClaimSchema.find({}).exec();
-    return res.status(200).json({
-        status: true,
-        testString: "teststring",
-        echoEId: eId
-    })
+    console.log("hell")
+
+    var result = []
+
+    policies = await PolicySchema.find({employeeId: eId}).exec()
+    for (policy of policies) {
+        console.log(policy)
+        insurId = policy._id.toString()
+        console.log(insurId)
+        claims = await InsuranceClaim.find({insuranceId: insurId}).exec()
+        console.log(claims)
+        result = result.concat(claims)
+        console.log(result)
+    }
+    // user = await Us
+    return res.status(200).json(result)
 }
