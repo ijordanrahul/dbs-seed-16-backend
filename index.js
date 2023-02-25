@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
+const db = require("./connection");
 
 const index = express();
 
@@ -31,8 +32,13 @@ const app = index.use((req, res, next) => {
     next();
 });
 
+
+
 const PORT = process.env.PORT || config.port;
 
+
+
 const server = app.listen(PORT, () => {
-    console.log('server is running on port', server.address().port);
+    db().then(() =>
+    console.log('server is running on port', server.address().port));
 });
