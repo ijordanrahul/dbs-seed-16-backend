@@ -11,4 +11,9 @@ router.post(
     }
 );
 
+router.get("/api/retrieve_all_claims_limited", (req, res) => {
+  controller.retrieveClaimsLimited(req, res);
+});
+
 module.exports = router;
+

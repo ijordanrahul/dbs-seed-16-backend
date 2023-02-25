@@ -1,4 +1,5 @@
-const InsuranceClaim = require('../../models/InsuranceClaims');
+const schemes = require('../../models/InsuranceClaims');
+
 module.exports.insert = async(params, res) => {
     const newClaim = new InsuranceClaim({
         insuranceId: params.insuranceId,
@@ -26,3 +27,11 @@ module.exports.insert = async(params, res) => {
 }
 
 
+module.exports.retrieveClaimsLimited = async(req, res) => {
+    const { eId } = req.query;
+    return res.status(200).json({
+        status: true,
+        testString: "teststring",
+        echoEId: eId
+    })
+}
