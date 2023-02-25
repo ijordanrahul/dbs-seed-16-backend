@@ -36,13 +36,6 @@ const app = index.use((req, res, next) => {
 
 const PORT = process.env.PORT || config.port;
 
-<<<<<<< HEAD
-app.get("/", (req, res) => {
-    res.send("hello world");
-});
-=======
-
->>>>>>> main
 
 const server = app.listen(PORT, () => {
     db().then(() =>
