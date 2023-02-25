@@ -2,10 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("./config");
 const db = require("./connection");
-const insuranceClaimRoutes = require("./src/controller/claims/routes")
-const router = require('./src/controller/claims/routes.js')
+
 const users = require("./src/controller/users/routes");
 const claims = require("./src/controller/claims/routes.js");
+
+const policies = require("./src/controller/policies/routes.js");
+
+const insuranceClaimRoutes = require("./src/controller/claims/routes");
+
+
 const index = express();
 
 index.use(bodyParser.json());
@@ -35,11 +40,11 @@ const app = index.use((req, res, next) => {
   next();
 });
 
-app.use('/claim', insuranceClaimRoutes);
+app.use("/claim", insuranceClaimRoutes);
 app.use("/users", users);
 app.use("/", claims);
+app.use("/policies", policies);
 
-app.use("/", router)
 const PORT = process.env.PORT || config.port;
 
 const server = app.listen(PORT, () => {

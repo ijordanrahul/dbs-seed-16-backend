@@ -1,4 +1,5 @@
 const InsuranceClaim = require('../../models/InsuranceClaims');
+const PolicySchema = require('../../models/Policy');
 
 module.exports.insert = async(params, res) => {
     const newClaim = new InsuranceClaim({
@@ -14,11 +15,9 @@ module.exports.insert = async(params, res) => {
         lastEditedClaimDate: params.lastEditedClaimDate,
     })
 
-    console.log(newClaim);
-
     try {
         const savedClaim = await newClaim.save();
-        //console.log(savedClaim)
+        console.log(savedClaim)
         return res.status(201).json({message: "Claim created successfully"});
     } catch (error) {
         return res.status(400).json({
@@ -91,10 +90,26 @@ module.exports.edit = async(params, res) => {
 
 
 module.exports.retrieveClaimsLimited = async(req, res) => {
-    const { eId } = req.query;
-    return res.status(200).json({
-        status: true,
-        testString: "teststring",
-        echoEId: eId
-    })
+    const { eId, stat } = req.query;
+    console.log("hell")
+
+    var result = []
+
+    policies = await PolicySchema.find({employeeId: eId}).exec()
+    for (policy of policies) {
+        console.log(policy)
+        insurId = policy._id.toString()
+        console.log(insurId)
+        claims = []
+        if (stat != '') {
+            claims = await InsuranceClaim.find({insuranceId: insurId, status: stat}).exec()
+        } else {
+            claims = await InsuranceClaim.find({insuranceId: insurId}).exec()
+        }
+        console.log(claims)
+        result = result.concat(claims)
+        console.log(result)
+    }
+    // user = await Us
+    return res.status(200).json(result)
 }
