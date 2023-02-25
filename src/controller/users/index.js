@@ -1,16 +1,18 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 
-const config = require("../../../config");
 const UserSchema = require("../../models/User");
+
+const secretKey = "SECRET";
+const expiresIn = 86400;
 
 module.exports.logIn = async (req, res) => {
   const { userid, password } = req.body;
   user = await UserSchema.findById(mongoose.Types.ObjectId(userid)).exec();
   if (user !== null) {
     if (user.password === password) {
-      const token = jwt.sign({ id: user._id }, config.API_KEY_JWT, {
-        expiresIn: config.TOKEN_EXPIRES_IN,
+      const token = jwt.sign({ id: user._id }, secretKey, {
+        expiresIn: expiresIn,
       });
       return res.status(201).json({
         token: token,
@@ -49,4 +51,9 @@ module.exports.signUp = async (req, res) => {
       message: "Failed to create user!",
     });
   }
+};
+
+module.exports.hello = async (req, res) => {
+  console.log(req.user);
+  return res.status(201);
 };
