@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
 const db = require("./connection");
+const router = require('./src/controller/claims/routes.js')
+
 
 const index = express();
 
@@ -34,6 +36,7 @@ const app = index.use((req, res, next) => {
 
 
 
+app.use("/", router)
 const PORT = process.env.PORT || config.port;
 
 
