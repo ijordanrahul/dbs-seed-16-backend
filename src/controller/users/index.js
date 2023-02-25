@@ -1,25 +1,30 @@
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+
+const config = require("../../../config");
 const UserSchema = require("../../models/User");
 
 module.exports.logIn = async (req, res) => {
   const { userid, password } = req.body;
   user = await UserSchema.findById(mongoose.Types.ObjectId(userid)).exec();
-  // schemes.User.findOne({ username: username }, function (err, user) {
-  // if (err) return res.status(400).json({ status: 400, message: err });
-  // Bcrypt.compare(password, user.password, (err, success) => {
-  // if (err) return res.status(400).json({ status: 400, message: err });
-  // if (success) {
-  // const token = jwt.sign({ id: user.id, username }, config.API_KEY_JWT, {
-  // expiresIn: config.TOKEN_EXPIRES_IN,
-  // });
-  // return res.status(201).json({ token });
-  // } else {
-  // return res
-  // .status(400)
-  // .json({ status: 400, message: "Invalid password" });
-  // }
-  // });
-  // });
+  if (user !== null) {
+    if (user.password === password) {
+      const token = jwt.sign({ id: user._id }, config.API_KEY_JWT, {
+        expiresIn: config.TOKEN_EXPIRES_IN,
+      });
+      return res.status(201).json({
+        token: token,
+        firstname: user.firstname,
+        lastname: user.lastname,
+      });
+    } else {
+      return res
+        .status(400)
+        .json({ status: 400, message: "Invalid password!" });
+    }
+  } else {
+    return res.status(400).json({ status: 400, message: "Invalid userid!" });
+  }
 };
 
 module.exports.signUp = async (req, res) => {
