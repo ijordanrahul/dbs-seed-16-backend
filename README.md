@@ -3,9 +3,11 @@ Backend Component of the repo
 
 # Environment Variables 
 - dbUrlMongoDB
-- API_KEY_JWT
-- TOKEN_EXPIRES_IN
 
 # Routes
+- Auth: 
+  1. Login 
+  @params: userid, password
+  @returns: {'token', 'firstname', 'lastname'}
 
 
