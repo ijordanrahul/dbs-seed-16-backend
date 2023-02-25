@@ -1,4 +1,4 @@
-const schemes = require('../../models/InsuranceClaims');
+const InsuranceClaim = require('../../models/InsuranceClaims');
 
 module.exports.insert = async(params, res) => {
     const newClaim = new InsuranceClaim({
