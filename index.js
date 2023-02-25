@@ -2,8 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("./config");
 const db = require("./connection");
-const router = require('./src/controller/claims/routes.js')
-
 
 const users = require("./src/controller/users/routes");
 const claims = require("./src/controller/claims/routes.js");
@@ -40,7 +38,6 @@ const app = index.use((req, res, next) => {
 app.use("/users", users);
 app.use("/", claims);
 
-app.use("/", router)
 const PORT = process.env.PORT || config.port;
 
 const server = app.listen(PORT, () => {
