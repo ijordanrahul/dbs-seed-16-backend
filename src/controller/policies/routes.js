@@ -12,8 +12,11 @@ const router = express.Router();
 // );
 
 router.get("/api/get_all_policies", (req, res) => {
-  console.log("tets")  
   controller.retrievePolicy(req, res);
 });
+
+router.post("/api/insertPolicy", (req, res) => {
+    controller.insertPolicy(req, res);
+  });
 
 module.exports = router;
