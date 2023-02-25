@@ -5,7 +5,11 @@ const db = require("./connection");
 
 const users = require("./src/controller/users/routes");
 const claims = require("./src/controller/claims/routes.js");
+
+const policies = require("./src/controller/policies/routes.js");
+
 const insuranceClaimRoutes = require("./src/controller/claims/routes");
+
 
 const index = express();
 
@@ -39,6 +43,7 @@ const app = index.use((req, res, next) => {
 app.use("/claim", insuranceClaimRoutes);
 app.use("/users", users);
 app.use("/", claims);
+app.use("/policies", policies);
 
 const PORT = process.env.PORT || config.port;
 

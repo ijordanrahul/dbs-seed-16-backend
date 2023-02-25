@@ -15,7 +15,7 @@ const PolicySchema = new Schema({
     required: true,
   },
   policyTerm: {
-    type: Number,
+    type: String,
     required: true,
   },
   policyEndDate: {
