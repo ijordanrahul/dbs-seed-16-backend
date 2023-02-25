@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config');
 const db = require("./connection");
-
+const insuranceClaimRoutes = require("./src/controller/claims/routes")
 const index = express();
 
 index.use(bodyParser.json());
@@ -32,10 +32,9 @@ const app = index.use((req, res, next) => {
     next();
 });
 
-
+app.use('/claim', insuranceClaimRoutes);
 
 const PORT = process.env.PORT || config.port;
-
 
 const server = app.listen(PORT, () => {
     db().then(() =>
