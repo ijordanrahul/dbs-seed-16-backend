@@ -15,8 +15,10 @@ const schemes = require('../../models/InsuranceClaims');
 // }
 
 module.exports.retrieveClaimsLimited = async(req, res) => {
+    const { eId } = req.query;
     return res.status(200).json({
         status: true,
         testString: "teststring",
+        echoEId: eId
     })
 }
