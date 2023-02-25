@@ -52,6 +52,14 @@ module.exports.edit = async(params, res) => {
     }
 }
 
+module.exports.deleteClaim = async(req, res) => {
+    const claimID  = req.body._id;
+    console.log(claimID)
+    employee_policies = await InsuranceClaimsSchema.find({ _id: claimID }).exec();
+    console.log(employee_policies)
+    return res.status(201).json({employee_policies});
+}
+
 
 module.exports.retrieveClaimsLimited = async(req, res) => {
     const { eId } = req.query;
