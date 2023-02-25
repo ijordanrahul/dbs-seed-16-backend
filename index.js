@@ -33,6 +33,12 @@ const app = index.use((req, res, next) => {
 
 const PORT = process.env.PORT || config.port;
 
+app.get("/get_all_policies", (req, res) => { 
+    res.send("Hello world")
+    }
+);
+
 const server = app.listen(PORT, () => {
     console.log('server is running on port', server.address().port);
 });
+
