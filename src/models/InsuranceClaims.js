@@ -20,7 +20,7 @@ const InsuranceClaimsSchema = new Schema({
     required: false,
   },
   amount: {
-    type: Float32Array,
+    type: Number,
     required: true,
   },
   purpose: {
@@ -28,7 +28,7 @@ const InsuranceClaimsSchema = new Schema({
     required: true,
   },
   followUp: {
-    type: boolean,
+    type: Boolean,
     required: true,
   },
   previousClaimId: {
@@ -49,4 +49,3 @@ module.exports = InsuranceClaims = mongoose.model(
   "users",
   InsuranceClaimsSchema
 );
-
