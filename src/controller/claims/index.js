@@ -1,5 +1,6 @@
 const InsuranceClaim = require('../../models/InsuranceClaims');
 const PolicySchema = require('../../models/Policy');
+const mongoose = require("mongoose");
 
 module.exports.insert = async(params, res) => {
     const newClaim = new InsuranceClaim({
@@ -53,9 +54,10 @@ module.exports.edit = async(params, res) => {
 }
 
 module.exports.deleteClaim = async(req, res) => {
+    const update = { status: 'Deleted' }
     const claimID  = req.body._id;
     console.log(claimID)
-    employee_policies = await InsuranceClaimsSchema.find({ _id: claimID }).exec();
+    employee_policies = await InsuranceClaim.findOneAndUpdate({'_id':mongoose.Types.ObjectId(claimID), "status":{$ne:"Approved"}},update,{new:true}).exec();
     console.log(employee_policies)
     return res.status(201).json({employee_policies});
 }
