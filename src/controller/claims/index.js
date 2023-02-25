@@ -54,7 +54,7 @@ module.exports.edit = async(params, res) => {
 
 
 module.exports.retrieveClaimsLimited = async(req, res) => {
-    const { eId } = req.query;
+    const { eId, stat } = req.query;
     console.log("hell")
 
     var result = []
@@ -64,7 +64,12 @@ module.exports.retrieveClaimsLimited = async(req, res) => {
         console.log(policy)
         insurId = policy._id.toString()
         console.log(insurId)
-        claims = await InsuranceClaim.find({insuranceId: insurId}).exec()
+        claims = []
+        if (stat != '') {
+            claims = await InsuranceClaim.find({insuranceId: insurId, status: stat}).exec()
+        } else {
+            claims = await InsuranceClaim.find({insuranceId: insurId}).exec()
+        }
         console.log(claims)
         result = result.concat(claims)
         console.log(result)
