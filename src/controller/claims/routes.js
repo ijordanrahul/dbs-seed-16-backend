@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 
-const controller = require('./index');
+const controller = require("./index");
 
 const router = express.Router();
 
@@ -11,11 +11,9 @@ const router = express.Router();
 //     }
 // );
 
-router.get(
-    '/api/retrieve_all_claims_limited',
-    (req, res) => {
-        controller.retrieveClaimsLimited(req, res)
-    }
-)
+router.get("/api/retrieve_all_claims_limited", (req, res) => {
+  controller.retrieveClaimsLimited(req, res);
+});
 
 module.exports = router;
+
