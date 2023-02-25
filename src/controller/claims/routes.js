@@ -11,6 +11,18 @@ router.post(
     }
 );
 
+router.post(
+    '/api/update',
+    (req, res) => {
+        controller.edit(req.body, res);
+    }
+);
+
+router.post("/api/getOne", (req, res) => {
+    controller.retrieve(req.body, res);
+});
+
+
 router.get("/api/retrieve_all_claims_limited", (req, res) => {
   controller.retrieveClaimsLimited(req, res);
 });
