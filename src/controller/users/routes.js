@@ -5,6 +5,7 @@ const controller = require("./index");
 const router = express.Router();
 
 router.post("/api/logIn", (req, res) => {
+  console.log("tets")  
   controller.logIn(req, res);
 });
 

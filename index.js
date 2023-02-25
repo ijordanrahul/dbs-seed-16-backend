@@ -7,6 +7,7 @@ const router = require('./src/controller/claims/routes.js')
 
 const users = require("./src/controller/users/routes");
 const claims = require("./src/controller/claims/routes.js");
+const policies = require("./src/controller/policies/routes.js");
 
 const index = express();
 
@@ -39,6 +40,7 @@ const app = index.use((req, res, next) => {
 
 app.use("/users", users);
 app.use("/", claims);
+app.use("/policies", policies);
 
 app.use("/", router)
 const PORT = process.env.PORT || config.port;
